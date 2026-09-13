@@ -14,7 +14,7 @@ public:
 	Motor* shooter_motor[SHOOTER_MOTOR_NUM]{};
 	Motor* supply_motor[SUPPLY_MOTOR_NUM]{};
 	
-	enum MODE { PC, RC, AUTOAIM, RESET, ROTATION, SPINNING, FOLLOW, SEPARATE, FIRE, STOP } mode;
+	enum MODE { TEST, RC, AUTOAIM, RESET, ROTATION, SPINNING, FOLLOW, SEPARATE, FIRE, STOP } mode;
 	struct CHASSIS
 	{
 
@@ -30,8 +30,10 @@ public:
 
 	struct PANTILE
 	{
+
 		enum TYPE { YAW, PITCH };
 		float mark_pitch{}, mark_yaw{};
+		float keep_angle1{}, keep_angle2{};
 		PID pantile_PID[3] = { {0.04f,0.f,0.f},{0.05f,0.f,0.f}, {0.f,0.f,0.f} };
 		const float sensitivity = 2.5f;
 		bool aim = false;

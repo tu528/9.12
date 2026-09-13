@@ -16,9 +16,9 @@ void RC::OnRC()
 
 	if (Shift_mode())
 	{
-
+		ctrl.pantile.keep_angle1 = imu_pantile.GetAngleYaw();
 	}
-
+	
 }
 
 void RC::OnPC()
@@ -79,49 +79,92 @@ void RC::RC_CheckState() {
 }
 
 void RC::RC_Control() {
+
+
 	if (ctrl.mode != CONTROL::RESET)
 	{
-
-		/*ctrl.chassis.speedx = rc.ch[3] * 4000.f / 660.f;
-		ctrl.chassis.speedy = -1 * rc.ch[2] * 4000.f / 660.f;
-		ctrl.chassis.speedz = 0;*/
-
-		//ctrl.chassis.Keep_Direction();
-
+		if (rc.ch[0] >= 30 || rc.ch[0] <= -30)
+		{
+			ctrl.chassis.speedx = rc.ch[0] * para.max_speed / 660.f;
+		}
+		else
+		{
+			ctrl.chassis.speedx = 0;
+		}
+		if (rc.ch[1] >= 30 || rc.ch[1] <= -30)
+		{
+			ctrl.chassis.speedy = rc.ch[1] * para.max_speed / 660.f;
+		}
+		else
+		{
+			ctrl.chassis.speedy = 0;
+		}
+		
 		switch (ctrl.mode)
 		{
 		case CONTROL::ROTATION:
+		{
 
+		}
 			break;
 
 		case CONTROL::FOLLOW:
+		{
 
+		}
 			break;
 
 		case CONTROL::SEPARATE:
+		{
 
+		}
 			break;
 
 		case CONTROL::AUTOAIM:
+		{
 
+		}
 			break;
 
 		case CONTROL::FIRE:
-	
+		{
+
+		}
 			break;
 
-		case CONTROL::STOP:
-
+		case CONTROL::TEST:
+		{
+			if (rc.ch[2] >= 30 || rc.ch[2] <= -30)
+			{
+				ctrl.chassis.speedz = rc.ch[2] * para.max_speed / 660.f;
+			}
+			else
+			{
+				ctrl.chassis.speedz = 0;
+			}
+			if (rc.ch[2] >= 30 || rc.ch[2] <= -30)
+			{
+				ctrl.chassis.speedz = rc.ch[2] * para.max_speed / 660.f;
+			}
+			else
+			{
+				ctrl.chassis.speedz = 0;
+			}
+		}
 			break;
 
 		case CONTROL::SPINNING:
+		{
 
+		}
 			break;
 
 		default:
+		{
 			ctrl.chassis.speedx = 0;
 			ctrl.chassis.speedy = 0;
 			ctrl.chassis.speedz = 0;
+		}
 			break;
 		}
 	}
@@ -141,9 +184,9 @@ void RC::RC_Control() {
 		can2_motor[4].setspeed = 0;
 		can2_motor[5].setspeed = 0;
 		can2_motor[6].setspeed = 0;
-		DMmotor[0].setSpeed = 0;
-		DMmotor[1].setSpeed = 0;
-		DMmotor[2].setSpeed = 0;
+		//DMmotor[0].setSpeed = 0;
+		//DMmotor[1].setSpeed = 0;
+		//DMmotor[2].setSpeed = 0;
 	}
 }
 

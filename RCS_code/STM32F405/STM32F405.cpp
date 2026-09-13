@@ -75,7 +75,7 @@ int main(void)
 	imu_pantile.Init(&uart1, USART1, 115200, CH010);
 	rc.Init(&uart2, USART2, 100000);
 	power.Init(&uart5,UART5,9600);
-	xuc, Init(&uart6, USART6, 115200);
+	xuc. Init(&uart6, USART6, 115200);
 
 	para.Init();
 

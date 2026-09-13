@@ -126,11 +126,15 @@ void Motor::Ontimer(uint8_t idata[][8], uint8_t* odata)//idate: receive;odate: t
 	}
 	else if (mode == POS)
 	{
-
+		setspeed = pid[position].Position(setangle - angle[0], 10000.f);
+		current = pid[speed].Position(setspeed - curspeed, 10000.f);
+		setcurrent = current;
 	}
 	else if (mode == SPD)
 	{
-
+		setspeed = testspeed;
+		current = pid[speed].Position(setspeed - curspeed, 10000.f);
+		setcurrent = current;
 	}
 	recorded_the_Laps();
 	GetDistanceFromMechanicalAngle();
