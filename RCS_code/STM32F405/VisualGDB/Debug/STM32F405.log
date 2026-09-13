@@ -1,0 +1,1 @@
+﻿C:\Program Files (x86)\Sysprogs\VisualGDB\MSBuild\Targets\gcc.targets(321,5): error MSB4181: “GCCCompile”任务返回了 false，但未记录错误。
