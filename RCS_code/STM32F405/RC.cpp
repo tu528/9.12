@@ -37,19 +37,19 @@ void RC::RC_CheckState() {
 	switch (RC_STATE(rc.s[0], rc.s[1]))
 	{
 	case RC_STATE(UP, UP):
-		ctrl.mode = CONTROL::ROTATION;
+		ctrl.mode = CONTROL::TEST;
 		break;
 
 	case RC_STATE(UP, MID):
-		ctrl.mode = CONTROL::ROTATION;
+		ctrl.mode = CONTROL::TEST;
 		break;
 
 	case RC_STATE(UP, DOWN):
-		ctrl.mode = CONTROL::SPINNING;
+		ctrl.mode = CONTROL::TEST;
 		break;
 
 	case RC_STATE(MID, UP):
-		ctrl.mode = CONTROL::FOLLOW;
+		ctrl.mode = CONTROL::TEST;
 		break;
 
 	case RC_STATE(MID, MID):
@@ -57,19 +57,19 @@ void RC::RC_CheckState() {
 		break;
 
 	case RC_STATE(MID, DOWN):
-		ctrl.mode = CONTROL::SEPARATE;
+		ctrl.mode = CONTROL::TEST;
 		break;
 
 	case RC_STATE(DOWN, UP):
-		ctrl.mode = CONTROL::FIRE;
+		ctrl.mode = CONTROL::TEST;
 		break;
 
 	case RC_STATE(DOWN, MID):
-		ctrl.mode = CONTROL::FIRE;
+		ctrl.mode = CONTROL::TEST;
 		break;
 
 	case RC_STATE(DOWN, DOWN):
-		ctrl.mode = CONTROL::STOP;
+		ctrl.mode = CONTROL::TEST;
 		break;
 
 	default:
@@ -79,7 +79,6 @@ void RC::RC_CheckState() {
 }
 
 void RC::RC_Control() {
-
 
 	if (ctrl.mode != CONTROL::RESET)
 	{
@@ -175,15 +174,13 @@ void RC::RC_Control() {
 		can1_motor[3].setspeed = 0;
 		can1_motor[4].setspeed = 0;
 		can1_motor[5].setspeed = 0;
-		can1_motor[6].setspeed = 0;
-		can1_motor[7].setspeed = 0;
+	
 		can2_motor[0].setspeed = 0;
 		can2_motor[1].setspeed = 0;
 		can2_motor[2].setspeed = 0;
 		can2_motor[3].setspeed = 0;
 		can2_motor[4].setspeed = 0;
 		can2_motor[5].setspeed = 0;
-		can2_motor[6].setspeed = 0;
 		//DMmotor[0].setSpeed = 0;
 		//DMmotor[1].setSpeed = 0;
 		//DMmotor[2].setSpeed = 0;

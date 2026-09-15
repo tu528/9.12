@@ -2,6 +2,16 @@
 #include "tim.h"
 #include "judgement.h"
 #include "HTmotor.h"
+#include <math.h>
+
+#define MAX_SPEED 3000.0f
+
+float clamp_speed(float target)
+{
+	if (target > MAX_SPEED) return MAX_SPEED;
+	if (target < -MAX_SPEED) return -MAX_SPEED;
+	return target;
+}
 
 void CONTROL::Init(std::vector<Motor*> motor)
 {
@@ -30,7 +40,6 @@ void CONTROL::Init(std::vector<Motor*> motor)
 	pantile_motor[PANTILE::TYPE::PITCH]->setangle = para.initial_pitch;
 	pantile_motor[PANTILE::TYPE::YAW]->setangle = para.initial_yaw;
 }
-
 
 void CONTROL::Control_Pantile(int32_t ch_yaw, int32_t ch_pitch)
 {
@@ -79,18 +88,40 @@ void CONTROL::CHASSIS::Keep_Direction()
 
 void CONTROL::CHASSIS::Update()
 {
-	extern Motor can1_motor[4];
-
-
 	if (ctrl.mode == RESET)
 	{
-		speedx = 0;
-		speedy = 0;
-		speedz = 0;
+		can1_motor[0].testspeed = 100;
+		can1_motor[1].testspeed = 100;
+		can1_motor[2].testspeed = 100;
+		can1_motor[3].testspeed = 100;
 	}
 	else if (ctrl.mode == CONTROL::TEST)
 	{
+		speedx = ctrl.chassis.speedx;
+		speedy = ctrl.chassis.speedy;
+		speedz = ctrl.chassis.speedz;
 
+		/*uint32_t ramp_slope;
+		{
+		ramp_slope = (fabsf(speedz) > (fabsf(speedx) + fabsf(speedy))) 
+			    ? 190 * 5
+				: 150 * 5;
+		}*/
+
+		float target0 = clamp_speed(-speedy * 0.707f - speedx * 0.707f + speedz);
+		float target1 = clamp_speed(-speedy * 0.707f + speedx * 0.707f + speedz);
+		float target2 = clamp_speed( speedy * 0.707f + speedx * 0.707f + speedz);
+		float target3 = clamp_speed( speedy * 0.707f - speedx * 0.707f + speedz);
+
+		/*can1_motor[0].testspeed = (int32_t)Ramp(target0, can1_motor[0].testspeed, ramp_slope);
+		can1_motor[1].testspeed = (int32_t)Ramp(target1, can1_motor[1].testspeed, ramp_slope);
+		can1_motor[2].testspeed = (int32_t)Ramp(target2, can1_motor[2].testspeed, ramp_slope);
+		can1_motor[3].testspeed = (int32_t)Ramp(target3, can1_motor[3].testspeed, ramp_slope);*/
+
+		can2_motor[0].testspeed = (int32_t)target0;
+		//can1_motor[1].testspeed = (int32_t)target1;
+		//can1_motor[2].testspeed = (int32_t)target2;
+		//can1_motor[3].testspeed = (int32_t)target3;
 	}
 }
 
@@ -111,7 +142,7 @@ void CONTROL::SHOOTER::Update()
 	}
 }
 
-float CONTROL::CHASSIS::Ramp(float setval, float curval, uint32_t RampSlope)
+float CONTROL::CHASSIS::Ramp(float setval, float curval, uint32_t RampSlope)//防止电机速度变化过快，导致电流过大，电机烧毁
 {
 
 	if ((setval - curval) >= 0)

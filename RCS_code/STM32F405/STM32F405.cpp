@@ -29,19 +29,19 @@
 
 Motor can1_motor[CAN1_MOTOR_NUM] = {
 	Motor(M3508,SPD,chassis, ID1, PID(10.f, 0.0f, 1.5f,0.f)),
-	Motor(M2006,SPD,chassis, ID2, PID(10.f, 0.0f, 1.5f,0.f)),
-	Motor(M6020,POS,pantile, ID3, PID(40.f, 0.0f, 1.5f,0.f),PID(0.8f, 0.005f, 15.0f,0.f)),
-	Motor(M6020,POS,pantile, ID4, PID(40.f, 0.0f, 1.5f,0.f),PID(0.8f, 0.005f, 15.0f,0.f)),
-	Motor(M6020,POS,pantile, ID6, PID(40.f, 0.0f, 1.5f,0.f),PID(0.8f, 0.005f, 15.0f,0.f)),
-	Motor(M6020,SPD,chassis, ID8, PID(10.f, 0.0f, 1.5f,0.f))
+	Motor(M3508,SPD,chassis, ID2, PID(10.f, 0.0f, 1.5f,0.f)),
+	Motor(M3508,SPD,chassis, ID3, PID(10.f, 0.0f, 1.5f,0.f)),
+	Motor(M3508,SPD,chassis, ID4, PID(10.f, 0.0f, 1.5f,0.f)),
+	Motor(M3508,SPD,shooter, ID5, PID(10.f, 0.0f, 1.5f,0.f)),
+	Motor(M2006,SPD,shooter, ID6, PID(10.f, 0.0f, 1.5f,0.f))
 };
 Motor can2_motor[CAN2_MOTOR_NUM] = {
 	Motor(M3508,SPD,chassis, ID1, PID(10.f, 0.0f, 1.5f,0.f)),
 	Motor(M2006,SPD,chassis, ID2, PID(10.f, 0.0f, 1.5f,0.f)),
 	Motor(M6020,POS,pantile, ID3, PID(40.f, 0.0f, 1.5f,0.f),PID(0.8f, 0.005f, 15.0f,0.f)),
 	Motor(M6020,POS,pantile, ID4, PID(40.f, 0.0f, 1.5f,0.f),PID(0.8f, 0.005f, 15.0f,0.f)),
-	Motor(M6020,POS,pantile, ID7, PID(40.f, 0.0f, 1.5f,0.f),PID(0.8f, 0.005f, 15.0f,0.f)),
-	Motor(M6020,SPD,chassis, ID8, PID(10.f, 0.0f, 1.5f,0.f))
+	Motor(M6020,POS,pantile, ID5, PID(40.f, 0.0f, 1.5f,0.f),PID(0.8f, 0.005f, 15.0f,0.f)),
+	Motor(M6020,SPD,supply,  ID6, PID(10.f, 0.0f, 1.5f,0.f))
 };
 DMMOTOR DMmotor[1] = {
 	DMMOTOR(0x01, P_S, L_F),
@@ -73,9 +73,9 @@ int main(void)
 	timer.Init(BASE, TIM3, 1000).BaseInit();
 
 	imu_pantile.Init(&uart1, USART1, 115200, CH010);
-	rc.Init(&uart2, USART2, 100000);
+	rc.Init(&uart3, USART3, 100000);
 	power.Init(&uart5,UART5,9600);
-	xuc. Init(&uart6, USART6, 115200);
+	//xuc. Init(&uart6, USART6, 115200);
 
 	para.Init();
 

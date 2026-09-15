@@ -183,7 +183,8 @@ VisualGDB/Debug/control.o: control.cpp control.h \
  C:/Users/wu/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/FreeRTOS/Source/Include/task.h \
  C:/Users/wu/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/FreeRTOS/Source/Include/list.h \
  C:/Users/wu/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/FreeRTOS/Source/Include/queue.h \
- imu.h usart.h tim.h gpio.h judgement.h CRC.h HTmotor.h can.h
+ imu.h usart.h tim.h gpio.h judgement.h CRC.h HTmotor.h can.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\c++\10.3.1\math.h
 control.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\c++\10.3.1\vector:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\c++\10.3.1\bits\stl_algobase.h:
@@ -380,3 +381,4 @@ judgement.h:
 CRC.h:
 HTmotor.h:
 can.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\c++\10.3.1\math.h:

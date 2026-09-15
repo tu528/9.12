@@ -41,6 +41,9 @@
     <MCUPropertyListFile>$(ProjectDir)stm32.props</MCUPropertyListFile>
   </PropertyGroup>
   <ItemDefinitionGroup>
+    <ClCompile>
+      <CPPLanguageStandard>GNUPP11</CPPLanguageStandard>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
   </ItemGroup>

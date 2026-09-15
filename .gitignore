@@ -1,0 +1,19 @@
+# ---- IDE / build artifacts (Visual Studio / VisualGDB / GCC) ----
+.vs/
+.visualgdb/
+*.suo
+*.user
+*.o
+*.dep
+*.d
+*.rsp
+*.alldeps
+*.ipch
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+*.vsidx
+*.progstat
+*.log
+VisualGDB/Debug/
